@@ -19,19 +19,6 @@ public class VolatileTest {
 
     public static void main(String[] args) throws InterruptedException {
 
-        new Thread(() -> num = 1, "A").start();
-        new Thread(() -> num = 10, "B").start();
-        new Thread(() -> num = 30, "C").start();
-
-        new Thread(() -> {
-            System.out.println(Thread.currentThread().getName() + "num value = " + num);
-        }, "D").start();
-
-        new Thread(() -> num = 50, "E").start();
-
-        Thread.sleep(1000);
-
-        System.out.println("lasted num value = " + num);
     }
 
 }
