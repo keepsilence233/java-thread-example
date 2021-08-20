@@ -1,5 +1,7 @@
 package qx.leizige.thread.basic.volatie;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author leizige
  * created 2021/08/09
@@ -18,7 +20,35 @@ public class VolatileTest {
     private static volatile Integer num = 0;
 
     public static void main(String[] args) throws InterruptedException {
+        System.out.println(" num old value = " + num);
 
+        new Thread(() -> {
+            System.out.println("进入[" + Thread.currentThread().getName() + "]线程");
+
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            addNum();
+
+            System.out.println("[" + Thread.currentThread().getName() + "]线程 update num,value = " + num);
+        }).start();
+
+
+        /**
+         * 如果num不使用volatile修饰,子线程update num = 100之后不会刷新主内存,所以main线程获取到的num值为0
+         */
+        while (num.equals(0)) {
+            //empty
+        }
+
+        System.out.println(Thread.currentThread().getName() + "运行结束! num value = " + num);
+    }
+
+
+    private static void addNum() {
+        num = 1000;
     }
 
 }
