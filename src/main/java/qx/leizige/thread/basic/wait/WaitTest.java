@@ -22,6 +22,8 @@ public class WaitTest {
      *           //doSomething
      *      }
      *  </p>
+     *  一个线程调用共享对象的notify()方法后，会唤醒一个在该共享变量上调用wait系列方法后被挂起的线程。
+     *  一个共享变量上可能会有多个线程在等待，具体唤醒哪个等待的线程是随机的。
      */
     static final BlockingQueue<String> queue = new ArrayBlockingQueue<>(5);
 
@@ -71,6 +73,9 @@ public class WaitTest {
             }
 
         }, "B").start();
+
+        Thread.sleep(2000);
+        System.exit(0);
 
     }
 }
