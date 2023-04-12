@@ -1,4 +1,4 @@
-package qx.leizige.thread.lock.reentrant;
+package qx.leizige.thread.lock.locks;
 
 
 import java.util.concurrent.TimeUnit;
@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author leizige
  * created 2021/08/10
  */
-public class ReentrantLockTest {
+public class ReentrantLockExample {
 
     /**
      * ReentrantLock 默认非公平锁

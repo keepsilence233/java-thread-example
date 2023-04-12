@@ -1,4 +1,4 @@
-package qx.leizige.thread.lock.synchron;
+package qx.leizige.thread.lock.locks.synchron;
 
 import java.util.concurrent.TimeUnit;
 
