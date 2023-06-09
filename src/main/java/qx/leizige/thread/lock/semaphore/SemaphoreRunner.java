@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Semaphore 信号量，许可，用于控制在一段时间内，可并发访问执行的线程数量
+ * Semaphore 可以允许多个线程访问一个临界区
  */
 public class SemaphoreRunner {
 
