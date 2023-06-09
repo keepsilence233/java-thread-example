@@ -8,9 +8,8 @@ import java.util.concurrent.*;
 public class CyclicBarrierExample {
 
     private final static int THREAD_NUM = 3;
-    private final static CyclicBarrier cyclicBarrier = new CyclicBarrier(THREAD_NUM, () -> {
-        System.out.println("全部线程已到达屏障");
-    });
+    private static final Executor executor = Executors.newFixedThreadPool(1);    //执行回调的线程池
+    private static final CyclicBarrier cyclicBarrier = new CyclicBarrier(THREAD_NUM, () -> executor.execute(() -> System.out.println("全部线程已到达屏障")));
 
     /**
      * 假设有一家公司要全体员工进行团建活动，活动内容为翻越三个障碍物，每一个人翻越障碍物所用的时间是不一样的。
