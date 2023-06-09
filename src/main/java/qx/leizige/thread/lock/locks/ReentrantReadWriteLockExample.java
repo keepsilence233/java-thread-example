@@ -7,6 +7,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * @author leizige
  * create by 2023/04/13 01:07
+ * <p>
+ * 读写多允许多个线程同时读共享变量，而互斥锁是不允许的。这是在读多写少场景下性能优化互斥锁的关键条件
+ * </p>
  */
 public class ReentrantReadWriteLockExample {
 
@@ -25,8 +28,8 @@ public class ReentrantReadWriteLockExample {
         void processCacheData() {
             r.lock();       //1、读锁
             if (!cacheValid) {  //2、读操作,如果缓存无效
-                r.unlock(); //3、释放读锁
-                w.lock();   //4、获取写锁（获取写锁之前必须先释放读锁）
+                r.unlock(); //3、释放读锁,因为不允许锁的升级
+                w.lock();   //4、获取写锁（获取写锁之前必须先释放读锁）（如果没有释放读锁就获取写锁,会导致锁永久等待。最终导致相关线程都被阻塞,永远也没有机会被唤醒）
 
                 try {
                     //重新缓存有效性,如果无效
