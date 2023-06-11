@@ -23,6 +23,8 @@ public class CompletionServiceExample {
 
         //拿到询价结果异步处理保存到数据库
         for (int i = 0; i < 3; i++) {
+            //take:如果阻塞队列为空,调用take方法的线程会阻塞
+            //poll:如果阻塞队列为空,调用poll方法会返回null值
             Integer result = cs.take().get();
             executor.execute(() -> save(result));
         }
