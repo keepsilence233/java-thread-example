@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  * </p>
  * <p>
  *     interrupt() : 中断线程，线程A运行时，线程B可以调用线程A的interrupt来设置A的中断标志为true并返回
- *    					 设置标志仅仅是设置标志，线程A实际并没有被中断，它会继续往下执行。
+ *    					 设置标志仅仅是设置标志，线程A实际并没有被中断，它会继续往下执行。（这里不能直接停止，而是设置一个标志位：B 告诉 A 你有空停一下，A 收到之后检查一下标志位，如果真的中断了，检查一下现场再推出）
  *     isInterrupted() : 检测当前线程是否被中断，如果是返回true，否则返回false
  *     interrupted() : 检测当前线程是否被中断，如果是返回true，否则返回false
  *     					与isInterrupted不同的是，该方法如果发现当前线程被中断，则会清除中断标志，并且该方法是static方法，可以通过Thread类直接调用。

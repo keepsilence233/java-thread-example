@@ -22,6 +22,8 @@ public class SemaphoreThrottlingExample {
                     System.out.println("用户 " + userId + " 正在排队等待进入资源...");
 
                     // 获取许可，如果没有可用许可，线程会在此阻塞
+                    //可以尝试 tryAcquire or tryAcquire(1000) 如果大量线程通过 tryAcquire 挂起阻塞或者直接丢弃任务,都不是一个很好的解决方案
+                    // 可以通过 EnhancedSemaphoreExample 中的线程池队列做缓冲(减少阻塞挂起的线程数量) 或者使用 Guava 的 RateLimiter
                     semaphore.acquire();
 
                     System.out.println(">>> 用户 " + userId + " 成功抢到资源，开始处理业务...");
